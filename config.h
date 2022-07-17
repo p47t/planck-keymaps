@@ -47,3 +47,16 @@
 
 // Most tactile encoders have detents every 4 stages
 #define ENCODER_RESOLUTION 4
+
+#define RGBLIGHT_ANIMATIONS
+
+// Prevent normal rollover on alphas from accidentally triggering mods.
+#define IGNORE_MOD_TAP_INTERRUPT
+
+#define TAPPING_TERM 200
+
+#define LEADER_PER_KEY_TIMING
+#define LEADER_TIMEOUT (TAPPING_TERM+50)
+
+#define ONESHOT_TAP_TOGGLE 2  /* Tapping this number of times holds the key until tapped once again. */
+#define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
