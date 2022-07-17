@@ -53,7 +53,7 @@
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
 
-#define TAPPING_TERM 200
+#define TAPPING_TERM 250
 
 #define LEADER_PER_KEY_TIMING
 #define LEADER_TIMEOUT (TAPPING_TERM+50)
