@@ -17,6 +17,16 @@
 #include QMK_KEYBOARD_H
 #include "muse.h"
 
+#if __has_include("macros.h")
+#include "macros.h"
+#else
+#define MACRO_STRING1 ""
+#define MACRO_STRING2 ""
+#define MACRO_STRING3 ""
+#define MACRO_STRING4 ""
+#define MACRO_STRING5 ""
+#endif
+
 // Tap dance
 
 typedef enum {
@@ -282,6 +292,12 @@ enum planck_keycodes {
   DVORAK,
   PLOVER,
   EXT_PLV,
+
+  MACKEY1,
+  MACKEY2,
+  MACKEY3,
+  MACKEY4,
+  MACKEY5,
 };
 
 #define TD_QUOT TD(TD_QUOTES)
@@ -380,18 +396,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      | Reset|Debug | RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|  Del |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |MUSmod|Aud on|Audoff|AGnorm|AGswap|Qwerty|Colemk|Dvorak|Plover|      |
+ * |      |      |MUSmod|Aud on|Audoff|AGnorm|AGswap|MACKEY1|MACKEY2|MACKEY3|MACKEY4|  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|TermOn|TermOf|      |      |      |
+ * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|TermOn|TermOf|MACKEY5|     |     |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_grid(
-    _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, KC_DEL ,
-    _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______,  _______, _______, _______,
-    _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
+    _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_DEL ,
+    _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, MACKEY1, MACKEY2, MACKEY3, MACKEY4, _______,
+    _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  MACKEY5, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
 /* Colemak
@@ -536,6 +552,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(_PLOVER);
       }
       return false;
+      break;
+    case MACKEY1:
+      if (record->event.pressed) {
+         send_string_with_delay_P(MACRO_STRING1, 10);
+         return false;
+      }
+      break;
+    case MACKEY2:
+      if (record->event.pressed) {
+        send_string_with_delay_P(MACRO_STRING2, 10);
+        return false;
+      }
+      break;
+    case MACKEY3:
+      if (record->event.pressed) {
+        send_string_with_delay_P(MACRO_STRING3, 10);
+        return false;
+      }
+      break;
+    case MACKEY4:
+      if (record->event.pressed) {
+        send_string_with_delay_P(MACRO_STRING4, 10);
+        return false;
+      }
+      break;
+    case MACKEY5:
+      if (record->event.pressed) {
+        send_string_with_delay_P(MACRO_STRING5, 10);
+        return false;
+      }
       break;
   }
   return true;
