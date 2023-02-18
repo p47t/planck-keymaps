@@ -276,6 +276,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 #define TR_SCLN TRAILING_SEMICOLON
 #define TR_COMM TRAILING_COMMA
+#define TR_RARR RIGHT_ARROW
 
 #define CMD_Z LGUI(KC_Z)
 #define CMD_X LGUI(KC_X)
@@ -288,6 +289,7 @@ enum planck_keycodes {
   BACKLIT,
   TRAILING_SEMICOLON,
   TRAILING_COMMA,
+  RIGHT_ARROW,
   COLEMAK,
   DVORAK,
   PLOVER,
@@ -370,7 +372,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,    KC_ASTR,    KC_LPRN, KC_RPRN, KC_BSPC,
     KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS,    KC_PLUS,    KC_LCBR, KC_RCBR, TR_SCLN,
     OS_LSFT, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_EQL,     KC_LABK,    KC_RABK, KC_BSLS, OS_RSFT,
-    _______, _______, _______, _______, _______, KC_MINS, KC_MINS, _______,    KC_HOME,    KC_PGDN, KC_PGUP, KC_END
+    _______, _______, _______, _______, _______, TR_RARR, TR_RARR, _______,    KC_HOME,    KC_PGDN, KC_PGUP, KC_END
 ),
 
 /* Raise
@@ -510,6 +512,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TRAILING_COMMA:
         if (record->event.pressed) {
             SEND_STRING(SS_TAP(X_END)",");
+            return false;
+        }
+        break;
+    case RIGHT_ARROW:
+        if (record->event.pressed) {
+            SEND_STRING("->");
             return false;
         }
         break;
