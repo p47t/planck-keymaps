@@ -50,9 +50,12 @@
 
 #define RGBLIGHT_ANIMATIONS
 
+<<<<<<< HEAD
 // Prevent normal rollover on alphas from accidentally triggering mods.
 // #define IGNORE_MOD_TAP_INTERRUPT
 
+=======
+>>>>>>> a87ae4a (fix(planck): Compile errors with latest QMK firmware)
 #define TAPPING_TERM 250
 
 #define LEADER_PER_KEY_TIMING
