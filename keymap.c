@@ -55,7 +55,7 @@ static struct t_tap {
 /* Sentinel value for invalid tap dance exit */
 #define TAP_DANCE_NO_MATCH 64
 
-tap_state_t get_tapdance_state(qk_tap_dance_state_t *state) {
+tap_state_t get_tapdance_state(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed) {
             return SINGLE_TAP;
@@ -83,7 +83,7 @@ tap_state_t get_tapdance_state(qk_tap_dance_state_t *state) {
     }
 }
 
-void td_quotes_finished(qk_tap_dance_state_t *state, void *user_data) {
+void td_quotes_finished(tap_dance_state_t *state, void *user_data) {
     qk_tap_state.quotes = get_tapdance_state(state);
     switch (qk_tap_state.quotes) {
         case SINGLE_TAP:
@@ -104,7 +104,7 @@ void td_quotes_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void td_quotes_reset(qk_tap_dance_state_t *state, void *user_data) {
+void td_quotes_reset(tap_dance_state_t *state, void *user_data) {
     switch (qk_tap_state.quotes) {
         case SINGLE_TAP:
         case SINGLE_HOLD:
@@ -126,7 +126,7 @@ void td_quotes_reset(qk_tap_dance_state_t *state, void *user_data) {
     qk_tap_state.quotes = 0;
 }
 
-void td_grave_finished(qk_tap_dance_state_t *state, void *user_data) {
+void td_grave_finished(tap_dance_state_t *state, void *user_data) {
     qk_tap_state.grave = get_tapdance_state(state);
     switch (qk_tap_state.grave) {
         case SINGLE_TAP:
@@ -148,7 +148,7 @@ void td_grave_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void td_grave_reset(qk_tap_dance_state_t *state, void *user_data) {
+void td_grave_reset(tap_dance_state_t *state, void *user_data) {
     switch (qk_tap_state.grave) {
         case SINGLE_TAP:
         case SINGLE_HOLD:
@@ -169,7 +169,7 @@ void td_grave_reset(qk_tap_dance_state_t *state, void *user_data) {
     qk_tap_state.grave = 0;
 }
 
-void td_magic_finished(qk_tap_dance_state_t *state, void *user_data) {
+void td_magic_finished(tap_dance_state_t *state, void *user_data) {
     qk_tap_state.magic = get_tapdance_state(state);
     switch (qk_tap_state.magic) {
         case SINGLE_TAP: {
@@ -195,7 +195,7 @@ void td_magic_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void td_magic_reset(qk_tap_dance_state_t *state, void *user_data) {
+void td_magic_reset(tap_dance_state_t *state, void *user_data) {
     switch (qk_tap_state.magic) {
         case SINGLE_TAP:
         case DOUBLE_TAP:
@@ -226,7 +226,7 @@ enum tapdance_keycodes {
 };
 
 // Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     // once: single quote, twice: double quote, thrice: backtick
     [TD_QUOTES] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_quotes_finished, td_quotes_reset),
 
@@ -407,8 +407,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_planck_grid(
     _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_DEL ,
-    _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, MACKEY1, MACKEY2, MACKEY3, MACKEY4, _______,
-    _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  MACKEY5, _______, _______, _______, _______,
+    _______, _______, _______,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, MACKEY1, MACKEY2, MACKEY3, MACKEY4, _______,
+    _______, _______, _______,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  MACKEY5, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
