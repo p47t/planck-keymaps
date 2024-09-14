@@ -25,6 +25,7 @@
 #define MACRO_STRING3 ""
 #define MACRO_STRING4 ""
 #define MACRO_STRING5 ""
+#define MACRO_STRING6 ""
 #endif
 
 // Tap dance
@@ -300,6 +301,7 @@ enum planck_keycodes {
   MACKEY3,
   MACKEY4,
   MACKEY5,
+  MACKEY6,
 };
 
 #define TD_QUOT TD(TD_QUOTES)
@@ -400,7 +402,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |MUSmod|Aud on|Audoff|AGnorm|AGswap|MACKEY1|MACKEY2|MACKEY3|MACKEY4|  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|TermOn|TermOf|MACKEY5|     |     |
+ * |      |      |      |Muson |Musoff|MIDIon|MIDIof|MACKEY5|MACKEY6|    |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -408,7 +410,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_planck_grid(
     _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_DEL ,
     _______, _______, _______,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, MACKEY1, MACKEY2, MACKEY3, MACKEY4, _______,
-    _______, _______, _______,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  MACKEY5, _______, _______, _______, _______,
+    _______, _______, _______,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  MACKEY5, MACKEY6, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
@@ -588,6 +590,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MACKEY5:
       if (record->event.pressed) {
         send_string_with_delay_P(MACRO_STRING5, 10);
+        return false;
+      }
+      break;
+    case MACKEY6:
+      if (record->event.pressed) {
+        send_string_with_delay_P(MACRO_STRING6, 10);
         return false;
       }
       break;
